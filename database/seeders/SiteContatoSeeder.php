@@ -15,8 +15,8 @@ class SiteContatoSeeder extends Seeder
      */
     public function run()
     {
+        /*
         $contato = new SiteContato();
-
         SiteContato::create([
             'nome' => 'Júlio Soares',
             'telefone' => '249874587562',
@@ -24,5 +24,7 @@ class SiteContatoSeeder extends Seeder
             'motivo_contato' => 2,
             'mensagem' => 'Este aqui é a nova seed'
         ]);
+        */
+        SiteContato::factory()->count(100)->create();
     }
 }
