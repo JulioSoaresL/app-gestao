@@ -11,7 +11,6 @@ class ContatoController extends Controller
     {
         /* dd($request->all());
         echo $request->input('nome');
-        $contato = new SiteContato();
         $contato->nome = $request->input('nome');
         $contato->telefone = $request->input('telefone');
         $contato->email = $request->input('email');
@@ -20,12 +19,28 @@ class ContatoController extends Controller
         print_r($contato->getAttributes());
         $contato->save(); */
         
-        $contato = new SiteContato();
-        $contato->fill($request->all());
-        $contato->save();
+        // $contato = new SiteContato();
+        // $contato->fill($request->all());
         
-
-
-        return view('site.contato');
+        $motivo_contatos = [
+            '1' => 'Duvida',
+            '2' => 'Elogio',
+            '3' => 'Reclamação',
+        ];
+        
+        return view('site.contato',['motivo_contatos' => $motivo_contatos]);
+    }
+    
+    public function salvar(Request $request) 
+    {
+        //Validação de dados com variavel $errors do laravel
+        $request->validate([
+            'nome' => 'required | min:3 | max:50',
+            'telefone' => 'required',
+            'email' => 'required',
+            'motivo_contato' => 'required',
+            'mensagem' => 'required | max:2000', 
+        ]);
+        // SiteContato::create($request->all());
     }
 }
