@@ -2,12 +2,10 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\LogAcesso;
 use Closure;
-use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
 
-class LogAcessoMiddleware
+class AutenticacaoMiddleware
 {
     /**
      * Handle an incoming request.
@@ -18,10 +16,10 @@ class LogAcessoMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        // dd($request);
-        $ip = $request->server->get('REMOTE_ADDR');
-        $route = $request->getRequestUri();
-        LogAcesso::create(['log' => "O IP $ip requisitou a rota acesso a rota $route"]);
-        return $next($request);
+        if (true) {
+            return $next($request);
+        }else {
+            return Response('Acesso Negado!');
+        }
     }
 }
