@@ -4,16 +4,16 @@ use App\Http\Controllers\ContatoController;
 use App\Http\Controllers\FornecedorController;
 use App\Http\Controllers\PrincipalController;
 use App\Http\Controllers\SobreNosController;
-use App\Http\Middleware\LogAcessoMiddleware;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [PrincipalController::class, 'principal'])
-    ->name('site.index')
-    ->middleware(LogAcessoMiddleware::class);
-    
+Route::get('/', [PrincipalController::class, 'principal'])->name('site.index');
+
 Route::get('/sobrenos', [SobreNosController::class, 'sobreNos'])->name('site.sobrenos');
-Route::middleware(LogAcessoMiddleware::class)->get('/contato', [ContatoController::class, 'contato'])->name('site.contato');
+
+Route::get('/contato', [ContatoController::class, 'contato'])->name('site.contato');
+
 Route::post('/contato', [ContatoController::class, 'salvar'])->name('site.contato');
+
 Route::get('/login', function(){ return "Login"; })->name('site.login');
 
 Route::prefix('/app')->group(function(){
