@@ -18,10 +18,15 @@ class LogAcessoMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        // dd($request);
         $ip = $request->server->get('REMOTE_ADDR');
         $route = $request->getRequestUri();
         LogAcesso::create(['log' => "O IP $ip requisitou a rota acesso a rota $route"]);
-        return $next($request);
+       
+        // return $next($request);
+
+        $resposta = $next($request);
+        $resposta->setStatusCode(201,'bla');
+        return $resposta;
+        // dd($resposta);
     }
 }
