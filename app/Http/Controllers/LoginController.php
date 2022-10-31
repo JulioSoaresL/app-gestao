@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 
+use function Termwind\terminal;
+
 class LoginController extends Controller
 {
     public function index(Request $request)
@@ -49,9 +51,15 @@ class LoginController extends Controller
             $_SESSION['nome'] = $usuario->name;
             $_SESSION['email'] = $usuario->email;
             
-            return redirect()->route('app.clientes');
+            return redirect()->route('app.home');
         }else{
             return redirect()->route('site.login', ['erro' => 1]);
         }
+    }
+
+    public function sair()
+    {
+        session_destroy();
+        return redirect()->route('site.index');
     }
 }
